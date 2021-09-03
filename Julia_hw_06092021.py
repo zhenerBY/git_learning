@@ -1,14 +1,3 @@
-# a = 'hello word'
-# b = 'HELLO WORD'
-# c = 'Hello word'
-# d = 'HeLLo WOrD'
-# strings = (a, b, c, d)
-# for str in strings:
-#     print('capitalize: ', str.capitalize())
-#     print('upper: ', str.upper())
-#     print('lower: ', str.lower())
-#     print('title: ', str.title())
-
 def upper(phrase: str) -> str:
     """Convert all phrase to uppercase"""
     phrase_list = list(phrase)
@@ -76,28 +65,34 @@ def isdigit(phrase: str) -> bool:
 
 def replace(phrase: str, old: str, new: str) -> str:
     """Replaces old with new in a phrase"""
-
-
     lenphrase = len(phrase)
     lenold = len(old)
     lenew = len(new)
     phrase_list = list(phrase)
     old_list = list(old)
     new_list = list(new)
-    control = False
+    phrase_list_new = []
+    continue1 = 0
     for c1 in range(lenphrase):
-        for c2 in range(lenold):
-            control = True
-            if lenphrase <= c1 + c2:
-                if phrase_list[c1 + c2] != old_list[c2]:
-                    control = False
-    print(control)
-    return control
-
-
-
-
-
+        control = []
+        if continue1 <= 0:
+            for c2 in range(lenold):
+                if lenphrase >= c1 + c2 + lenold:
+                    if phrase_list[c1 + c2] == old_list[c2]:
+                        control.append(1)
+                if sum(control) == lenold:
+                    if phrase_list_new:
+                        phrase_list_new = phrase_list_new + phrase_list[c3 + lenold:c1] + new_list
+                        c3 = c1
+                        continue1 = lenold - 1
+                    else:
+                        phrase_list_new = phrase_list[:c1] + new_list
+                        c3 = c1
+                        continue1 = lenold - 1
+        else:
+            continue1 -= 1
+    phrase_list_new = phrase_list_new + phrase_list[c3 + lenold:lenphrase]
+    return ''.join(phrase_list_new)
 
 # phrase = input('Please, input phrase')
 phrase = '  !HelloW World!!!! hhheloWWW '
